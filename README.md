@@ -8,3 +8,5 @@ Process harold.jpg in steps of 5 upto 500 eigenvalues
 Make animation from processed images:
 
 `ffmpeg -framerate 20 -i processed%00d.png -c:v libx264 -profile:v high -crf 2 -preset veryslow -pix_fmt yuv420p output.mp4`
+
+Warning the script.sh will take a few hours to run.
