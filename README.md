@@ -1,5 +1,7 @@
 # svd-compress
-Final Project for MATH 545 at UMass Amherst. Uses Singlar Value Decomposition on an Input Image and recomposes it with a different number of components in the Diagonal
+Final Project for MATH 545 at UMass Amherst.
+
+Uses Singlar Value Decomposition on an Input Image and recomposes it with a different number of components in the diagonal
 
 Warning: The script.sh will take a few hours to run.
 
