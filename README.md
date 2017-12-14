@@ -1,12 +1,21 @@
 # svd-compress
 Final Project for MATH 545 at UMass Amherst
 
-Process harold.jpg in steps of 5 upto 500 eigenvalues
+Dependencies:
+* numpy
+* matplotlib
+* pillow (Python Imaging Library)
+* ffmpeg (for making animation from processed images)
 
-`python3 compress.py stock/harold.jpg 500 5`
+Process harold.jpg in steps of 1 upto 500 components:
 
-Make animation from processed images:
+`python3 compress.py stock/valley.jpg 500 1`
 
-`ffmpeg -framerate 20 -i processed%00d.png -c:v libx264 -profile:v high -crf 2 -preset veryslow -pix_fmt yuv420p output.mp4`
+Make animation from these processed images:
 
-Warning the script.sh will take a few hours to run.
+`
+cd valley
+ffmpeg -framerate 24 -i processed%00d.png -c:v libx264 -profile:v high -crf 2 -preset veryslow -pix_fmt yuv420p valley.mp4
+`
+
+Warning: The script.sh will take a few hours to run.
