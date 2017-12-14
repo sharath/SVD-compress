@@ -15,7 +15,14 @@ Warning: The script.sh will take a few hours to run.
 
 `python3 compress.py stock/valley.jpg 500 1`
 
-#### Make animation from these processed images:
+#### Make animation from these processed images: (only works if stepsize is 1)
 
-`cd valley`
 `ffmpeg -framerate 24 -i processed%00d.png -c:v libx264 -profile:v high -crf 2 -preset veryslow -pix_fmt yuv420p valley.mp4`
+
+#### Make csv data file from output image:
+
+`python3 sort.py valley`
+
+#### Make graphs from data:
+
+`python3 data_analysis.py data/valley.csv`
