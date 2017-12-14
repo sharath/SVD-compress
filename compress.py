@@ -52,8 +52,6 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Invalid Parameters")
         exit(0)
-    if not os.path.exists("processed"):
-        os.mkdir("processed")
     compress(sys.argv[1], int(sys.argv[2])+1, int(sys.argv[3]))
 
 
