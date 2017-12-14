@@ -15,9 +15,9 @@ Warning: The script.sh will take a few hours to run.
 
 ## Documentation
 
-#### Process valley.jpg in steps of 1 upto 500 components:
+#### Process valley.jpg in steps of 1 upto 360 components:
 
-`python3 compress.py stock/valley.jpg 500 1`
+`python3 compress.py stock/valley.jpg 360 1`
 
 #### Make animation from these processed images: (only works if stepsize is 1)
 
@@ -29,4 +29,4 @@ Warning: The script.sh will take a few hours to run.
 
 #### Make graphs from data:
 
-`python3 data_analysis.py data/valley.csv`
+`python3 data_analysis.py data/valley.csv` 0 361 20
