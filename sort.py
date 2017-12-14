@@ -11,7 +11,9 @@ def sort(directory):
         pairs.append((size, file))
     pairs.sort(key=lambda s: s[0])
 
-    f = open("%s.csv" % directory, "w")
+    if not os.path.exists("data"):
+        os.mkdir("data")
+    f = open(os.path.join("data", "%s.csv" % directory), "w")
     for pair in pairs:
         f.write("%d,%s\n" % pair)
     f.close()
