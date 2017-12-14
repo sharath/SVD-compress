@@ -5,8 +5,12 @@ import os
 
 
 def compress(file, n, s):
+    folder = os.path.split(file)[1].split(".")[0]
     img = np.array(Image.open(file))
-    Image.fromarray(np.uint8(img)).save("processed/unprocessed.png", compress_level=1)
+    if not os.path.exists(folder):
+        os.mkdir(folder)
+
+    Image.fromarray(np.uint8(img)).save(os.path.join(folder, "unprocessed.png"), compress_level=1)
     row, col, _ = img.shape
     img = img / 255
 
@@ -41,7 +45,7 @@ def compress(file, n, s):
         img = Image.fromarray(np.uint8(reconstimg*255))
         draw = ImageDraw.Draw(img)
         draw.text((10, 10), "%d" % i, font_col, font=font)
-        img.save("processed/processed%d.png" % i, compress_level=1)
+        img.save(os.path.join(folder, "processed%d.png" % i), compress_level=1)
 
 
 if __name__ == "__main__":
