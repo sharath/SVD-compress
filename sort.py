@@ -13,7 +13,7 @@ def sort(directory):
 
     f = open("%s.csv" % dir, "w")
     for pair in pairs:
-        f.write("%d, %s\n" % pair)
+        f.write("%d,%s\n" % pair)
     f.close()
 
 
