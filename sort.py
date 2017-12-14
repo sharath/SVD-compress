@@ -1,11 +1,12 @@
 import os
 import sys
 
-def sort(dir):
-    list = os.listdir(dir)
+
+def sort(directory):
+    filelist = os.listdir(directory)
     pairs = []
-    for file in list:
-        location = os.path.join(dir, file)
+    for file in filelist:
+        location = os.path.join(directory, file)
         size = os.path.getsize(location)
         pairs.append((size, file))
     pairs.sort(key=lambda s: s[0])
