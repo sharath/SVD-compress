@@ -21,7 +21,7 @@ def compress(file, n, s):
     print("Computing SVD for B")
     U_b, sigma_b, V_b = np.linalg.svd(img[:, :, 2])
 
-    font = ImageFont.truetype("Prototype.ttf", 30)
+    font = ImageFont.truetype("Prototype.ttf", 80)
     font_col = 255, 255, 0
 
     for i in range(0, n, s):
