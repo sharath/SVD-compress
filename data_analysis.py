@@ -31,7 +31,7 @@ def graph(filename):
     plt.figure(figsize=(10, 10))
     plt.bar(y_pos, performance)
     plt.xticks(y_pos, objects, size=1)
-    plt.ylabel('Difference from Original (MB)', size=17)
+    plt.ylabel('Difference from Original (KB)', size=17)
     plt.title('SVD Compression Performance: "%s"' % os.path.split(filename)[1], size=17)
 
     if not os.path.exists("charts"):
