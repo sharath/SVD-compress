@@ -1,15 +1,19 @@
 # svd-compress
+
+## Description
 Final Project for MATH 545 at UMass Amherst.
 
 Uses Singlar Value Decomposition on an Input Image and recomposes it with a different number of components in the diagonal
 
 Warning: The script.sh will take a few hours to run.
 
-#### Dependencies:
+## Dependencies:
 * numpy
 * matplotlib
 * pillow (Python Imaging Library)
 * ffmpeg (for making animation from processed images)
+
+## Documentation
 
 #### Process valley.jpg in steps of 1 upto 500 components:
 
