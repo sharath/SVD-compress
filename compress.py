@@ -5,25 +5,43 @@ import os
 
 
 def compress(file, n, s):
-    img = Image.open(file)
-    imgbw = img.convert('LA')
+    img = np.array(Image.open(file))
+    row, col, _ = img.shape
+    img = img / 255
+    img_r = img[:, :, 0]
+    img_g = img[:, :, 1]
+    img_b = img[:, :, 2]
+
+    print("Computing SVD for R")
+    U_r, sigma_r, V_r = np.linalg.svd(img_r)
+    print("Computing SVD for G")
+    U_g, sigma_g, V_g = np.linalg.svd(img_g)
+    print("Computing SVD for B")
+    U_b, sigma_b, V_b = np.linalg.svd(img_b)
 
     font = ImageFont.truetype("Prototype.ttf", 30)
     yellow = 255, 255, 0
-    imgbw.convert('RGB').save("processed/bw.png", compress_level=1)
-
-    # convert to matrix
-    imgmat = np.array(list(imgbw.getdata(band=0)), float)
-    imgmat.shape = (imgbw.size[1], imgbw.size[0])
-    imgmat = np.matrix(imgmat)
-
-    U, sigma, V = np.linalg.svd(imgmat)
 
     for i in range(0, n, s):
         if i == 0:
             continue
-        reconstimg = np.matrix(U[:, :i] * np.diag(sigma[:i]) * np.matrix(V[:i:]))
-        img = Image.fromarray(reconstimg).convert('RGB')
+
+        print("Reconstructing R for Term %d" % i)
+        reconst_r = np.dot(U_r[:, :i], np.dot(np.diag(sigma_r[:i]), np.matrix(V_r[:i, :])))
+        print("Reconstructing G for Term %d" % i)
+        reconst_g = np.dot(U_g[:, :i], np.dot(np.diag(sigma_g[:i]), np.matrix(V_g[:i, :])))
+        print("Reconstructing B for Term %d" % i)
+        reconst_b = np.dot(U_b[:, :i], np.dot(np.diag(sigma_b[:i]), np.matrix(V_b[:i, :])))
+
+        reconstimg = np.zeros((row, col, 3), dtype='uint8')
+        reconstimg[:, :, 0] = reconst_r*255
+        reconstimg[:, :, 1] = reconst_g*255
+        reconstimg[:, :, 2] = reconst_b*255
+
+        reconstimg[reconstimg < 0] = 0
+        reconstimg[reconstimg > 255] = 255
+
+        img = Image.fromarray(reconstimg)
         draw = ImageDraw.Draw(img)
         draw.text((10, 10), "%d" % i, yellow, font=font)
 
