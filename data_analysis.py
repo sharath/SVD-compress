@@ -34,7 +34,9 @@ def graph(filename):
     plt.ylabel('Difference from Original (MB)', size=17)
     plt.title('SVD Compression Performance: "%s"' % os.path.split(filename)[1], size=17)
 
-    plt.savefig("%s.png" % os.path.split(filename)[1].split(".")[0])
+    if not os.path.exists("charts"):
+        os.mkdir("charts")
+    plt.savefig(os.path.join("charts", "%s.png" % os.path.split(filename)[1].split(".")[0]))
 
 
 if __name__ == "__main__":
