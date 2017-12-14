@@ -7,7 +7,7 @@ import re
 import os
 
 
-def graph(filename):
+def graph(filename, min, max, step):
     f = open(filename, "r")
     lines = f.read().splitlines()
     f.close()
@@ -27,11 +27,11 @@ def graph(filename):
     objects = comp
     y_pos = np.arange(len(objects))
     performance = diff
-
     plt.figure(figsize=(10, 10))
     plt.bar(y_pos, performance)
-    plt.xticks(y_pos, objects, size=1)
+    plt.xticks(np.arange(min, max, step))
     plt.ylabel('Difference from Original (KB)', size=17)
+    plt.xlabel('Number of Components', size=17)
     plt.title('SVD Compression Performance: "%s"' % os.path.split(filename)[1], size=17)
 
     if not os.path.exists("charts"):
@@ -40,4 +40,4 @@ def graph(filename):
 
 
 if __name__ == "__main__":
-    graph(sys.argv[1])
+    graph(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
