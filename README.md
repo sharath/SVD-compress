@@ -29,4 +29,4 @@ Warning: The script.sh will take a few hours to run.
 
 #### Make graphs from data:
 
-`python3 data_analysis.py data/valley.csv` 0 361 20
+`python3 data_analysis.py data/valley.csv 0 361 20`
