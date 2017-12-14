@@ -4,13 +4,13 @@ import sys
 import os
 
 
-def compress(file, n):
+def compress(file, n, s):
     img = Image.open(file)
     imgbw = img.convert('LA')
 
     if not os.path.exists("processed"):
         os.mkdir("processed")
-    imgbw.convert('RGB').save("processed/bw.png")
+    imgbw.convert('RGB').save("processed/bw.png", compress_level=1)
 
     # convert to matrix
     imgmat = np.array(list(imgbw.getdata(band=0)), float)
@@ -18,16 +18,18 @@ def compress(file, n):
     imgmat = np.matrix(imgmat)
 
     U, sigma, V = np.linalg.svd(imgmat)
-    for i in range(0, n, 10):
-        reconstimg = np.matrix(U[:, :i] * np.diag(sigma[:i]) * np.matrix(V[:i :]))
+    for i in range(0, n, s):
+        if i == 0:
+            continue
+        reconstimg = np.matrix(U[:, :i] * np.diag(sigma[:i]) * np.matrix(V[:i:]))
         img = Image.fromarray(reconstimg).convert('RGB')
-        img.save("processed/processed%d.png"%i)
+        img.save("processed/processed%d.png" % i, compress_level=1)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print("Invalid Parameters")
         exit(0)
-    compress(sys.argv[1], int(sys.argv[2])+1)
+    compress(sys.argv[1], int(sys.argv[2])+1, int(sys.argv[3]))
 
 
