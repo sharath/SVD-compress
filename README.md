@@ -1,4 +1,5 @@
 # svd-compress
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/sharath/svd-compress/master?filepath=demo.ipynb)
 
 ## Description
 Final Project for MATH 545 at UMass Amherst.
